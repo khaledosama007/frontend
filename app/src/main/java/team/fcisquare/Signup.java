@@ -6,8 +6,14 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class Signup extends AppCompatActivity {
+    private HashMap<String, String> params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,23 @@ public class Signup extends AppCompatActivity {
         }
 
         if(!error) {
-            //send user.email.pass to sign up service
+            params = new HashMap<String, String>();
+            params.put("name", name);
+            params.put("email", email); //Note: The backend side should check if a another user registered with the same email
+            params.put("pass", pass);
+            Connection postCon = new PostConnection(params, new ConnectionListener() {
+                @Override
+                public void getResult(String result) {
+                    try {
+                        Intent intent = new Intent(Signup.this, UserProfile.class);
+                        intent.putExtra("SuckMyJSon", result);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(Signup.this, "Death Wish", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            postCon.execute(URIs.POST_SIGN_UP);
         }
     }
 

@@ -1,6 +1,7 @@
 package team.fcisquare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +31,12 @@ public class UserProfile extends Activity {
 
         //testing connection
         t = (TextView)findViewById(R.id.userAccountUserName);
-        HashMap<String, String> h = new HashMap<>();
-   //     h.put("email", "mhmdsamir@gmail.comusers");
-  //      h.put("pass", "123");
+        Intent intent = getIntent();
+        String JSonSucker = intent.getStringExtra("SuckMyJSon");
+        t.setText(JSonSucker);
+        /* HashMap<String, String> h = new HashMap<>();
+        h.put("email", "mhmdsamir@gmail.comusers");
+        h.put("pass", "123");
         h.put("srcid", "1");
         h.put("dstid","2");
         connection = new PostConnection(h, new ConnectionListener() {
@@ -47,6 +51,6 @@ public class UserProfile extends Activity {
                }
             }
         });
-        connection.execute(URIs.POST_FOLLOW);
+        connection.execute(URIs.POST_FOLLOW); */
     }
 }

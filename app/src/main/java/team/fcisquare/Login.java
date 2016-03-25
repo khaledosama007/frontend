@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -28,17 +29,19 @@ public class Login extends AppCompatActivity {
         params = new HashMap<String, String>();
         params.put("email", username);
         params.put("pass", password);
-        Connection con = new PostConnection(params, new ConnectionListener() {
+        Connection postCon = new PostConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {
-            try{
-                JSONObject json = new JSONObject(result);
-                //WTF ?
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                try {
+                    Intent intent = new Intent(Login.this, UserProfile.class);
+                    intent.putExtra("SuckMyJSon", result);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(Login.this, "Death Wish", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        postCon.execute(URIs.POST_LOGIN);
 
     }
     public void onClickSignUp(View view) {
