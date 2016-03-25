@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
+ * This class is responsible for handling splash screen, and handling splash layout animation
+ *
  * @author Andrew Albert
  * @version 1.0
  * @since 22/3/2016
@@ -22,7 +24,7 @@ public class Splash extends Activity {
     private Intent intent;
 
     /**
-     * this class is responsible for handling splash screen, and handling splash layout animation
+     * Just the instructor
      * @param savedInstanceState
      */
     @Override

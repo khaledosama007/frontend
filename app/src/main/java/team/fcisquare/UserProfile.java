@@ -9,11 +9,20 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
- * Created by Andrew on 3/22/2016.
+ * This activity handles the profile for a user
+ *
+ * @author ANdrew ALbert
+ * @since 23/3/2016
+ * @version 1.0
  */
 public class UserProfile extends Activity {
     private Connection connection;
     private TextView t;
+
+    /**
+     * Just the instructor
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,19 +33,20 @@ public class UserProfile extends Activity {
         HashMap<String, String> h = new HashMap<>();
    //     h.put("email", "mhmdsamir@gmail.comusers");
   //      h.put("pass", "123");
-        h.put("id", "1");
-        connection = new GetConnection(h, new ConnectionListener() {
+        h.put("srcid", "1");
+        h.put("dstid","2");
+        connection = new PostConnection(h, new ConnectionListener() {
             @Override
             public void getResult(String result) {
                try{
                    JSONObject json = new JSONObject(result);
-                   t.setText(json.getString("lat"));
+                   t.setText(json.getString("status"));
                    Toast.makeText(UserProfile.this, "here", Toast.LENGTH_SHORT).show();
                }catch(Exception e) {
                    Toast.makeText(UserProfile.this, "shit", Toast.LENGTH_SHORT).show();
                }
             }
         });
-        connection.execute("http://swproject-404error.rhcloud.com/FCISquare/rest/lastposition");
+        connection.execute(URIs.POST_FOLLOW);
     }
 }

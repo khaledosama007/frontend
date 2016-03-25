@@ -1,10 +1,7 @@
 package team.fcisquare;
 
-import android.os.AsyncTask;
-
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,24 +11,40 @@ import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Created by Andrew on 3/22/2016.
+ * @author Andrew Albert
+ * @version 1.0
+ * @since 24/3/2016
+ *
+ * This class is used for POST connection requests
+ *
  */
-public class PostConnection extends AsyncTask<String, String, String> implements Connection {
+public class PostConnection extends Connection {
     private HashMap<String, String> data;
     private ConnectionListener listener;
 
+    /**
+     * ust an instructor, get hashmap of values and listener interface
+     *
+     * @param data
+     * @param listener
+     */
     public PostConnection(HashMap<String, String> data, ConnectionListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
+    /**
+     * Method used to connect to server
+     *
+     * @param params
+     * @return result of the service
+     */
     @Override
     protected String doInBackground(String... params) {
         byte[] result = null;
@@ -63,6 +76,11 @@ public class PostConnection extends AsyncTask<String, String, String> implements
         }
         return str;
     }
+    /**
+     * Method to return result to the listener
+     *
+     * @param result
+     */
     @Override
     public void onPostExecute(String result){
         listener.getResult(result);

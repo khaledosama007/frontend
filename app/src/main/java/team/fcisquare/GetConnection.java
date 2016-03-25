@@ -1,7 +1,5 @@
 package team.fcisquare;
 
-import android.os.AsyncTask;
-
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -16,17 +14,34 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Created by Andrew on 3/22/2016.
+ * @author Andrew Albert
+ * @version 1.0
+ * @since 24/3/2016
+ *
+ * This class is used for GET connection requests
+ *
  */
-public class GetConnection extends AsyncTask<String, String, String> implements Connection {
+public class GetConnection extends Connection {
     private HashMap<String, String> data;
     private ConnectionListener listener;
 
+    /**
+     * Just an instructor, get hashmap of values and listener interface
+     *
+     * @param data
+     * @param listener
+     */
     public GetConnection(HashMap<String, String> data, ConnectionListener listener) {
         this.data = data;
         this.listener = listener;
     }
 
+    /**
+     * Method used to connect to server
+     *
+     * @param params
+     * @return Result of the service
+     */
     @Override
     protected String doInBackground(String... params) {
         byte[] result = null;
@@ -58,6 +73,12 @@ public class GetConnection extends AsyncTask<String, String, String> implements 
         }
         return str;
     }
+
+    /**
+     * Method to return result to the listener
+     *
+     * @param result
+     */
     @Override
     public void onPostExecute(String result){
         listener.getResult(result);
