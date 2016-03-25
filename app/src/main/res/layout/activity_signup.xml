@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/blackShade"
+    tools:context="team.fcisquare.Signup">
+
+    <ImageView
+        android:id="@+id/logoMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/min"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10sp"
+        android:layout_marginRight="20sp"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"/>
+
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoMin"
+        android:textColor="@color/pureWhite"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="10sp"
+        android:text="@string/name"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t1"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:textColor="@color/pureWhite"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="10sp"
+        android:text="@string/email"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t2"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/t3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:textColor="@color/pureWhite"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="10sp"
+        android:text="@string/password"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t3"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="10sp"
+        android:textAllCaps="false"
+        android:background="@color/darkShade"
+        android:text="@string/signup"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"
+        android:onClick="onClickSignUp"
+        />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5sp"
+        android:text="@string/alreadyMember"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"
+        android:onClick="onClickLogin"/>
+
+</RelativeLayout>
