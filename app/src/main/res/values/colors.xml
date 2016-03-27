@@ -6,4 +6,10 @@
     <color name="MyBlue">#3399ff</color>
     <color name="Green">#00e64d</color>
     <color name="White">#ffffff</color>
+    <color name="YourBlue">#2ec1e2</color>
+    <color name="blackShade">#181818</color>
+    <color name="darkShade">#0d0d0d</color>
+    <color name="pureWhite">#ffffff</color>
+    <color name="deadGrey">#b2b2b2</color>
+    <color name="transWhite">#80ffffff</color>
 </resources>

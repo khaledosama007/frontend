@@ -1,6 +1,7 @@
 package team.fcisquare;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,24 +30,6 @@ public class UserProfile extends Activity {
         setContentView(R.layout.user_profile);
 
         //testing connection
-      /*  t = (TextView)findViewById(R.id.user_profile_image);
-        HashMap<String, String> h = new HashMap<>();
-   //     h.put("email", "mhmdsamir@gmail.comusers");
-  //      h.put("pass", "123");
-        h.put("srcid", "1");
-        h.put("dstid","2");
-        connection = new PostConnection(h, new ConnectionListener() {
-            @Override
-            public void getResult(String result) {
-               try{
-                   JSONObject json = new JSONObject(result);
-                   t.setText(json.getString("status"));
-                   Toast.makeText(UserProfile.this, "here", Toast.LENGTH_SHORT).show();
-               }catch(Exception e) {
-                   Toast.makeText(UserProfile.this, "shit", Toast.LENGTH_SHORT).show();
-               }
-            }
-        });
-        connection.execute(URIs.POST_FOLLOW);*/
+
     }
 }
