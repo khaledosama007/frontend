@@ -29,7 +29,7 @@ public class UserProfile extends Activity {
         setContentView(R.layout.user_profile);
 
         //testing connection
-        t = (TextView)findViewById(R.id.userAccountUserName);
+      /*  t = (TextView)findViewById(R.id.user_profile_image);
         HashMap<String, String> h = new HashMap<>();
    //     h.put("email", "mhmdsamir@gmail.comusers");
   //      h.put("pass", "123");
@@ -47,6 +47,6 @@ public class UserProfile extends Activity {
                }
             }
         });
-        connection.execute(URIs.POST_FOLLOW);
+        connection.execute(URIs.POST_FOLLOW);*/
     }
 }

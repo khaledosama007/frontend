@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/include" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/profile_image"
+        android:layout_below="@+id/include"
+
+        android:id="@+id/user_profile_picture"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+         />
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user name here"
-        android:textSize="30dp"
-        android:textColor="@android:color/black"
-        android:id="@+id/userAccountUserName"
-        />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        android:text="User name"
+        android:id="@+id/textView"
+        android:layout_below="@+id/include"
+        android:layout_toRightOf="@+id/user_profile_picture" />
+    <Button
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:text="View Profile Details"
+        android:textColor="@color/White"
+        android:background="@color/Green"
+        android:id="@+id/user_profile_details"
+        android:layout_below="@+id/user_profile_picture"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginTop="41dp" />
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:text="View followers"
+        android:textColor="@color/White"
+        android:background="@color/Green"
 
 
-            </LinearLayout>
+        android:id="@+id/button2"
+        android:layout_alignTop="@+id/user_profile_details"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-        </ScrollView>
-</LinearLayout>
+    <Button
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:text="Check in"
+        android:textColor="@color/White"
+        android:background="@color/Green"
+        android:id="@+id/button"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/user_profile_picture"
+        android:layout_toEndOf="@+id/user_profile_picture" />
+
+</RelativeLayout>

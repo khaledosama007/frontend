@@ -1,5 +1,12 @@
 package team.fcisquare;
 
+/**
+ * Class used to handle user data
+ *
+ * @author Andrew Albert
+ * @version 1.0
+ * @since 24/3/2016
+ */
 
 public class User {
     private String name;
