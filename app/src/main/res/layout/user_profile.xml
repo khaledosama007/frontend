@@ -69,7 +69,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/user_profile_check_in"
+        android:layout_marginTop="70dp"
         android:id="@+id/user_profile_data"
         ></ListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow"
+        android:id="@+id/follow_button"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/user_profile_check_in"
+        android:layout_alignRight="@+id/user_profile_view_folowers"
+        android:layout_alignEnd="@+id/user_profile_view_folowers"
+        android:background="@color/Green"
+        android:onClick="OnClickFollow" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UnFollow"
+        android:id="@+id/unfollow_button"
+        android:layout_alignTop="@+id/follow_button"
+        android:layout_alignLeft="@+id/user_profile_check_in"
+        android:layout_alignStart="@+id/user_profile_check_in"
+        android:background="@color/Green"
+        android:onClick="OnClickUnFollow" />
 
 </RelativeLayout>
