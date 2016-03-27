@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class Signup extends AppCompatActivity {
 
 
         editText = (EditText)findViewById(R.id.email);
-        String email = editText.getText().toString();
+        final String email = editText.getText().toString();
         if(email.isEmpty()){
             editText.setError("Your email is required.");
             error = true;
@@ -50,7 +51,7 @@ public class Signup extends AppCompatActivity {
         }
 
         editText = (EditText)findViewById(R.id.pass);
-        String pass = editText.getText().toString();
+        final String pass = editText.getText().toString();
         if(pass.isEmpty() || pass.length() < 8){
             editText.setError("Password must be at least 8 digits");
             error = true;
@@ -65,9 +66,36 @@ public class Signup extends AppCompatActivity {
                 @Override
                 public void getResult(String result) {
                     try {
-                        Intent intent = new Intent(Signup.this, UserProfile.class);
+                        HashMap<String, String> signInParams = new HashMap<>();
+                        signInParams.put("email", email);
+                        signInParams.put("pass", pass);
+                        Connection postLogin = new PostConnection(params, new ConnectionListener() {
+                            @Override
+                            public void getResult(String result) {
+                                JSONObject json = null;
+                                try {
+                                    json = new JSONObject(result);
+                                    User user = new User();
+                                    user.setEmail(json.getString("email"));
+                                    user.setId(json.getInt("id"));
+                                    user.setLat(json.getDouble("lat"));
+                                    user.setLon(json.getDouble("long"));
+                                    user.setPass(json.getString("pass"));
+                                    user.setName(json.getString("name"));
+                                    Intent intent = new Intent(getBaseContext(), UserProfile.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("user", user);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        postLogin.execute(URIs.POST_LOGIN);
+                      /*  Intent intent = new Intent(Signup.this, UserProfile.class);
                         intent.putExtra("SuckMyJSon", result);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     } catch (Exception e) {
                         Toast.makeText(Signup.this, "Death Wish", Toast.LENGTH_SHORT).show();
                     }

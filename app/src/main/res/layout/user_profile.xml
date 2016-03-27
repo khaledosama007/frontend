@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blackShade"
+    >
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/include" />
 
     <ImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/profile_image"
-        android:layout_below="@+id/include"
-
         android:id="@+id/user_profile_picture"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
+       android:layout_marginTop="10dp"
          />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User name"
-        android:id="@+id/textView"
-        android:layout_below="@+id/include"
-        android:layout_toRightOf="@+id/user_profile_picture" />
+        android:id="@+id/user_profile_name"
+        android:textColor="@color/deadGrey"
+        android:textSize="@dimen/abc_action_bar_progress_bar_size"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_alignBottom="@+id/user_profile_picture"
+        android:layout_alignRight="@+id/user_profile_view_folowers"
+        android:layout_alignEnd="@+id/user_profile_view_folowers" />
+
     <Button
-        android:layout_width="340dp"
+        android:layout_width="165dp"
         android:layout_height="40dp"
         android:text="View Profile Details"
         android:textColor="@color/White"
         android:background="@color/Green"
         android:id="@+id/user_profile_details"
         android:layout_below="@+id/user_profile_picture"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginTop="41dp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:onClick="OnClickViewProfileDetails"
+         />
     <Button
-        android:layout_width="140dp"
+        android:layout_width="165dp"
         android:layout_height="40dp"
         android:text="View followers"
         android:textColor="@color/White"
         android:background="@color/Green"
-
-
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/user_profile_details"
+        android:id="@+id/user_profile_view_folowers"
+        android:layout_marginRight="10dp"
+        android:layout_above="@+id/user_profile_check_in"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="OnClickViewFollowers"
+        />
 
     <Button
         android:layout_width="340dp"
@@ -53,9 +58,18 @@
         android:text="Check in"
         android:textColor="@color/White"
         android:background="@color/Green"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/user_profile_picture"
-        android:layout_toEndOf="@+id/user_profile_picture" />
+        android:id="@+id/user_profile_check_in"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/user_profile_details"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="OnClickCheckIn"
+       />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_profile_check_in"
+        android:id="@+id/user_profile_data"
+        ></ListView>
 
 </RelativeLayout>

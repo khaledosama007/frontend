@@ -29,12 +29,27 @@ public class Login extends AppCompatActivity {
         params = new HashMap<String, String>();
         params.put("email", username);
         params.put("pass", password);
+        //// TODO: 3/26/2016 add a part here 2 check if username and password are available or not !
         Connection postCon = new PostConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {
                 try {
-                    Intent intent = new Intent(Login.this, UserProfile.class);
+                 /*   Intent intent = new Intent(Login.this, UserProfile.class);
                     intent.putExtra("SuckMyJSon", result);
+                    startActivity(intent);*/
+                    // added by andrew
+                    JSONObject json = new JSONObject(result);
+                    User user = new User();
+                    user.setEmail(json.getString("email"));
+                    user.setId(json.getInt("id"));
+                    user.setLat(json.getDouble("lat"));
+                    user.setLon(json.getDouble("long"));
+                    user.setPass(json.getString("pass"));
+                    user.setName(json.getString("name"));
+                    Intent intent = new Intent(getBaseContext(), UserProfile.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("user", user);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 } catch (Exception e) {
                     Toast.makeText(Login.this, "Death Wish", Toast.LENGTH_SHORT).show();

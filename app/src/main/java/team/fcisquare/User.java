@@ -1,5 +1,7 @@
 package team.fcisquare;
 
+import java.io.Serializable;
+
 /**
  * Class used to handle user data
  *
@@ -8,7 +10,7 @@ package team.fcisquare;
  * @since 24/3/2016
  */
 
-public class User {
+public class User implements Serializable {
     private String name;
     private String email;
     private String pass;
