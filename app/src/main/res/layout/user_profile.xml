@@ -68,7 +68,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/user_profile_check_in"
+        android:layout_below="@+id/lat"
         android:layout_marginTop="70dp"
         android:id="@+id/user_profile_data"
         ></ListView>
@@ -95,5 +95,38 @@
         android:layout_alignStart="@+id/user_profile_check_in"
         android:background="@color/Green"
         android:onClick="OnClickUnFollow" />
+
+    <Button
+        android:layout_width="105dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/unfollow_button"
+        android:layout_marginTop="10dp"
+        android:text="view last position"
+        android:textColor="@color/pureWhite"
+        android:background="@color/Green"
+        android:onClick="OnClickViewLastPosition"
+        android:id="@+id/viewlast"
+        />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/viewlast"
+        android:layout_marginTop="10dp"
+        android:id="@+id/lat"
+        android:background="@color/pureWhite"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/viewlast"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/lat"
+        android:layout_marginLeft="10dp"
+        android:background="@color/pureWhite"
+        android:id="@+id/lon"
+        />
 
 </RelativeLayout>

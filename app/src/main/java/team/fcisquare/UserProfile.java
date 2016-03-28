@@ -54,12 +54,12 @@ public class UserProfile extends Activity {
     public void OnClickFollow(View view){
         HashMap  <String , String> data = new HashMap<String , String>();
         data.put("srcid", user.getId().toString());
-        data.put("dstid" , "3"); // Temporary user ID for testing till we implement search service
+        data.put("dstid", "5"); // Temporary user ID for testing till we implement search service
         Connection con = new PostConnection(data, new ConnectionListener() {
             @Override
             public void getResult(String result) {
                 try {
-                    JSONObject get =new JSONObject(result);
+                    JSONObject get = new JSONObject(result);
                     Log.i("Json Follow", get.getString("status"));
                     if(get.getString("status").equals("1")){
                         Toast.makeText(UserProfile.this , "Followed Successfully !" , Toast.LENGTH_LONG).show();
@@ -86,7 +86,7 @@ public class UserProfile extends Activity {
                     if(get.getString("status").equals("1")){
                         Toast.makeText(UserProfile.this , "UnFollowed Successfully !" , Toast.LENGTH_LONG).show();
                     }else {
-                        Toast.makeText(UserProfile.this , "Youre not Following This User !" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(UserProfile.this , "You are not Following This User !" , Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -97,5 +97,27 @@ public class UserProfile extends Activity {
     }
     public void OnClickViewProfileDetails(View view){
         // // TODO: 3/26/2016 to be added in next phases
+    }
+
+    public void OnClickViewLastPosition(View view){
+        //// TODO: 3/27/2016 to be removed later, this is just for testing
+        HashMap<String, String> params = new HashMap<>();
+        final TextView longText = (TextView)findViewById(R.id.lon);
+        final TextView latText = (TextView)findViewById(R.id.lat);
+        params.put("id", user.getId().toString());
+        Connection connection = new GetConnection(params, new ConnectionListener() {
+            @Override
+            public void getResult(String result) {
+                try {
+                    JSONObject json = new JSONObject(result);
+                    longText.setText(json.getString("long"));
+                    latText.setText(json.getString("lat"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        connection.execute(URIs.GET_LAST_POSITION);
     }
 }
