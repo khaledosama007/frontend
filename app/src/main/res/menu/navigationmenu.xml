@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/profile_nav_header"
+            android:title="Profile"
+            android:icon="@drawable/profile"
+            />
+        <item
+            android:id="@+id/following_nav_header"
+            android:title="Following"
+            android:icon="@drawable/following"
+            />
+        <item
+            android:id="@+id/credits_nav_header"
+            android:title="Credits"
+            android:icon="@drawable/credits"
+            />
+    </group>
+</menu>
