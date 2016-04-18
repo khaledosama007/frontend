@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/blackShade"
+    android:background="@color/colorPrimary"
+    android:id="@+id/sign_up_relative_layout"
     tools:context="team.fcisquare.Signup">
 
     <ImageView
@@ -89,7 +90,7 @@
         android:layout_marginTop="20sp"
         android:layout_marginBottom="10sp"
         android:textAllCaps="false"
-        android:background="@color/darkShade"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/signup"
         android:textColor="@color/pureWhite"
         android:textSize="20sp"

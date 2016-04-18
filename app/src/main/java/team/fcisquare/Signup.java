@@ -1,11 +1,16 @@
 package team.fcisquare;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -15,15 +20,23 @@ import java.util.HashMap;
 
 public class Signup extends AppCompatActivity {
     private HashMap<String, String> params;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        relativeLayout = (RelativeLayout) findViewById(R.id.sign_up_relative_layout);
     }
 
 
     public void onClickSignUp(View view) {
+        if(!isNetworkAvailable()){
+            Snackbar snackbar = Snackbar.make(relativeLayout,"Please check your internet connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            return;
+        }
+
         EditText editText = (EditText) findViewById(R.id.name);
         String name = editText.getText().toString();
         Boolean error = false;
@@ -87,6 +100,7 @@ public class Signup extends AppCompatActivity {
                                     bundle.putSerializable("user", user);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
+                                    finish();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -107,5 +121,11 @@ public class Signup extends AppCompatActivity {
 
     public void onClickLogin(View view) {
         startActivity(new Intent(this, Login.class));
+        finish();
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

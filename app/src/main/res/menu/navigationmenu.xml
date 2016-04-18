@@ -5,6 +5,7 @@
             android:id="@+id/profile_nav_header"
             android:title="Profile"
             android:icon="@drawable/profile"
+            android:onClick="profile"
             />
         <item
             android:id="@+id/following_nav_header"
@@ -15,6 +16,12 @@
             android:id="@+id/credits_nav_header"
             android:title="Credits"
             android:icon="@drawable/credits"
+            />
+        <item
+            android:id="@+id/sign_out_nav_header"
+            android:title="Sign out"
+            android:icon="@drawable/sign_out"
+            android:onClick="signOut"
             />
     </group>
 </menu>

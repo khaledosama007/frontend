@@ -56,6 +56,7 @@ public class Splash extends Activity {
                 if(eMail.equals("")){ // user not signed in, take him to login/sign up form
                     intent = new Intent(getBaseContext(), Signup.class);
                     startActivity(intent);
+                    finish();
                 }else { // user is signed in, take him to his account
                     //attempting to read user data
                     HashMap<String, String> params = new HashMap<>();
@@ -79,6 +80,7 @@ public class Splash extends Activity {
                                 bundle.putSerializable("user", user);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
+                                finish();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
