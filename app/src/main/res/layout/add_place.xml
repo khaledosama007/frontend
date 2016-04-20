@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/toolbar" android:id="@+id/main_toolbar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_toolbar"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:layout_margin="0dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add main details : "
+                android:textSize="@dimen/item_touch_helper_max_drag_scroll_per_frame"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:id="@+id/add_main_text"
+                android:textColor="@color/colorPrimary"
+                />
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/place_name_add_place"
+                android:layout_below="@id/add_main_text"
+                android:hint="Place name"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/blackShade"
+                />
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/place_description_add_place"
+                android:layout_below="@id/place_name_add_place"
+                android:hint="Description"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/blackShade"
+                />
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add manualy : "
+                android:clickable="false"
+                android:layout_below="@id/place_description_add_place"
+                android:longClickable="false"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/item_touch_helper_max_drag_scroll_per_frame"
+                android:id="@+id/manualy_text"
+                />
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/latitude_add_place"
+                android:layout_below="@id/manualy_text"
+                android:hint="Latitude"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/blackShade"
+                />
+
+            <EditText
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/longitude_add_place"
+                android:layout_below="@+id/latitude_add_place"
+                android:hint="Longitude"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/blackShade"
+                />
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add automaticaly : "
+                android:layout_below="@id/longitude_add_place"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/item_touch_helper_max_drag_scroll_per_frame"
+                android:clickable="false"
+                android:longClickable="false"
+                android:id="@+id/add_auto_text"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="Get position"
+                android:id="@+id/get_position_add_place"
+                android:textColor="@color/pureWhite"
+                android:background="@color/colorPrimary"
+                android:layout_below="@id/add_auto_text"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:onClick="onClickGetPosition"
+                android:typeface="serif"
+                />
+            <Button
+                android:layout_width="210dp"
+                android:layout_height="35dp"
+                android:text="Add place"
+                android:textStyle="italic"
+                android:typeface="serif"
+                android:textColor="@color/pureWhite"
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:onClick="onClickAddPlace"
+                android:id="@+id/add_place_button"
+                />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         mainFragment = new MainFragment();
         mainFragment.setArguments(bundle);
 
-
         notificationFragment = new NotificationFragment();
         notificationFragment.setArguments(bundle);
 
@@ -81,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                         navigationView.getMenu().getItem(0).setCheckable(false);
                         navigationView.getMenu().getItem(2).setCheckable(false);
                         navigationView.getMenu().getItem(3).setCheckable(false);
+                        break;
+                    case R.id.add_place_nav_header:
                         break;
                     case R.id.credits_nav_header:
                         navigationView.getMenu().getItem(2).setCheckable(true);
@@ -169,6 +170,9 @@ public class MainActivity extends AppCompatActivity {
         bundle.putSerializable("user", getIntent().getSerializableExtra("user"));
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+    public void addPlace(MenuItem item){
+        startActivity(new Intent(this, AddPlace.class));
     }
 
 }

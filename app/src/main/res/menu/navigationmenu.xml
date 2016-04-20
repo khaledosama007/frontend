@@ -8,6 +8,12 @@
             android:onClick="profile"
             />
         <item
+            android:id="@+id/add_place_nav_header"
+            android:title="Add place"
+            android:icon="@drawable/add_place"
+            android:onClick="addPlace"
+            />
+        <item
             android:id="@+id/following_nav_header"
             android:title="Following"
             android:icon="@drawable/following"
