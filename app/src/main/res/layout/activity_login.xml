@@ -30,8 +30,11 @@
         android:textColor="@color/pureWhite"
         android:textColorHint="@color/deadGrey"
         android:textSize="20sp"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:nextFocusDown="@id/loginBox"
         android:hint="@string/username"/>
-
+    <requestFocus />
     <EditText
         android:id="@+id/passBox"
         android:layout_width="match_parent"
@@ -45,6 +48,8 @@
         android:textColorHint="@color/deadGrey"
         android:textSize="20sp"
         android:hint="@string/password"
+        android:imeOptions="actionDone"
+
         android:inputType="textPassword"/>
 
     <Button

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:id="@+id/check_in_header_id"
+    android:background="@color/expandableListParent"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -59,33 +60,32 @@
         android:layout_height="wrap_content"
         android:text="00 Like"
         android:textColor="@color/deadGrey"
-        android:layout_below="@+id/icon_check_in"
-        android:layout_alignLeft="@+id/buttons_linear_layout"
-        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/user_comment_check_in_header"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp"
         android:clickable="false"
         android:longClickable="false"
         android:id="@+id/place_likes_check_in"
          />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userComment"
+        android:textColor="@color/darkShade"
+        android:layout_below="@+id/person_check_name"
+        android:layout_marginLeft="15dp"
+        android:clickable="false"
+        android:longClickable="false"
+        android:id="@+id/user_comment_check_in_header"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttons_linear_layout"
         android:layout_below="@+id/place_likes_check_in"
+        android:layout_marginTop="2dp"
         >
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_weight="1"
-        android:text="Comment"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/pureWhite"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:id="@+id/comment_check_in"
-        android:layout_below="@+id/place_likes_check_in"
-        android:layout_marginTop="7dp"
-        android:focusable="false"
-        />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -98,12 +98,9 @@
             android:layout_marginRight="5sp"
             android:id="@+id/like_check_in"
             android:layout_below="@+id/place_likes_check_in"
-            android:layout_marginTop="7dp"
             android:layout_alignParentRight="true"
             android:focusable="false"
             />
 
     </LinearLayout>
-
-
 </RelativeLayout>
