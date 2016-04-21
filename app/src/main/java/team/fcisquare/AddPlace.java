@@ -13,10 +13,17 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 /**
@@ -33,6 +40,9 @@ public class AddPlace extends AppCompatActivity {
     private EditText latitude;
     private EditText longitude;
     private Toolbar toolbar;
+    Place place;
+    private HashMap<String, String> params;
+    private JSONObject json = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +95,39 @@ public class AddPlace extends AppCompatActivity {
             longitude.setError("Invalid position");
             error = true;
         }
-
+        params = new HashMap<String , String>();
         if (!error) {
+            place = new Place();
+            params.put("name" , placeName.getText().toString());
+            params.put("desc", description.getText().toString());
+            params.put("lat", latitude.getText().toString());
+            params.put("lon" , longitude.getText().toString());
 
+            Connection con = new PostConnection(params, new ConnectionListener() {
+                @Override
+
+                public void getResult(String result) {
+                    Log.i("result" , result);
+                    try {
+                        json = new JSONObject(result);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        place.setName(json.getString("name"));
+                        place.setDescription(json.getString("desc"));
+                        place.setLon(Double.parseDouble(json.getString("lon")));
+                        place.setLat(Double.parseDouble(json.getString("lat")));
+                        Log.i("String", place.getName());
+                        Toast.makeText(getApplicationContext(), place.getName(), Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            con.execute(URIs.ADD_PLACE);
         }
     }
 
@@ -129,7 +169,11 @@ public class AddPlace extends AppCompatActivity {
     }
 
     private void sayBye() {
-        locationManager.removeUpdates(locationListener);
+        try {
+            locationManager.removeUpdates(locationListener);
+        }catch(SecurityException e){
+
+        }
     }
 
     @Override
@@ -139,7 +183,11 @@ public class AddPlace extends AppCompatActivity {
     }
 
     private void getPositionGPS() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
+        }catch (SecurityException e){
+
+        }
     }
     public static boolean isNumeric(String str) {
         try
