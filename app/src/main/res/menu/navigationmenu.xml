@@ -14,6 +14,12 @@
             android:onClick="addPlace"
             />
         <item
+            android:id="@+id/save_place_nav_header"
+            android:title="Save place"
+            android:icon="@drawable/add_place"
+            android:onClick="savePlace"
+            />
+        <item
             android:id="@+id/following_nav_header"
             android:title="Following"
             android:icon="@drawable/following"
