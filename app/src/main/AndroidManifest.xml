@@ -40,16 +40,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <Activity
-            android:name=".MessageList"
-            ></Activity>
-        <activity
-            android:name=".UserProfile"
-            android:label="@string/app_name" />
+        <activity android:name=".MessageList"/>
+        <activity android:name=".UserProfile"/>
         <activity android:name=".Signup" />
         <activity android:name=".Login"/>
         <activity android:name=".AddPlace"/>
         <activity android:name=".CheckIn"/>
+        <activity android:name=".SavePlace"/>
+
     </application>
 
 </manifest>

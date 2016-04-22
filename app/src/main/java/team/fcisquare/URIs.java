@@ -16,4 +16,5 @@ public class URIs {
     public static final String POST_UN_FOLLOW = "http://swproject-404error.rhcloud.com/FCISquare/rest/unfollow";
     public static final String GET_LAST_POSITION = "http://swproject-404error.rhcloud.com/FCISquare/rest/lastposition";
     public static final String ADD_PLACE ="http://swproject-404error.rhcloud.com/FCISquare/rest/addplace";
+    public static final String SAVE_PLACE ="http://swproject-404error.rhcloud.com/FCISquare/rest/saveplace";
 }

@@ -181,6 +181,11 @@ public class MainActivity extends AppCompatActivity {
     public void addPlace(MenuItem item){
         startActivity(new Intent(this, AddPlace.class));
     }
+    public void savePlace(MenuItem item){
+        Intent intent = new Intent(this , SavePlace.class);
+        intent.putExtra("id" , user.getId().toString());
+        startActivity(intent);
+    }
    /* public void OnClickComment(View view){ //for fragment
         Toast.makeText(this, "ds", Toast.LENGTH_SHORT).show();
     }*/
