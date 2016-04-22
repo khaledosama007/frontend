@@ -52,7 +52,11 @@ public class UserProfile extends AppCompatActivity {
 
     }
     public void OnClickCheckIn(View view){
-        //// TODO: 3/26/2016 taha's code here
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        Intent intent = new Intent(this, CheckIn.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void OnClickViewFollowers(View view){
@@ -112,6 +116,7 @@ public class UserProfile extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
         final TextView longText = (TextView)findViewById(R.id.lon);
         final TextView latText = (TextView)findViewById(R.id.lat);
+        final TextView placeNameText = (TextView)findViewById(R.id.user_profile_place_name);
         params.put("id", user.getId().toString());
         Connection connection = new GetConnection(params, new ConnectionListener() {
             @Override
@@ -120,6 +125,7 @@ public class UserProfile extends AppCompatActivity {
                     JSONObject json = new JSONObject(result);
                     longText.setText(json.getString("long"));
                     latText.setText(json.getString("lat"));
+                    placeNameText.setText(json.getString("name"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

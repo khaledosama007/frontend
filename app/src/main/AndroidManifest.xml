@@ -45,12 +45,11 @@
             ></Activity>
         <activity
             android:name=".UserProfile"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/app_name" />
         <activity android:name=".Signup" />
         <activity android:name=".Login"/>
         <activity android:name=".AddPlace"/>
-
+        <activity android:name=".CheckIn"/>
     </application>
 
 </manifest>
