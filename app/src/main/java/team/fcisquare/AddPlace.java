@@ -132,13 +132,15 @@ public class AddPlace extends AppCompatActivity {
     }
 
     public void onClickGetPosition(View view) {
+        Log.e("333", "-_-");
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 latitude.setText(location.getLatitude() + "");
                 longitude.setText((location.getLongitude() + ""));
+                android.util.Log.e("333", location.getLatitude() + "");
                 sayBye();//stop the listener
-                android.util.Log.e("555", location.getLatitude() + "");
+
             }
 
             @Override
@@ -186,16 +188,14 @@ public class AddPlace extends AppCompatActivity {
         try {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, locationListener);
         }catch (SecurityException e){
-
+            Log.e("333","shit");
         }
     }
     public static boolean isNumeric(String str) {
-        try
-        {
+        try {
             double num = Double.parseDouble(str);
         }
-        catch(NumberFormatException nfe)
-        {
+        catch(NumberFormatException e) {
             return false;
         }
         return true;

@@ -73,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.profile_nav_header:
                         navigationView.getMenu().getItem(0).setCheckable(true);
                         navigationView.getMenu().getItem(2).setCheckable(false);
-                        navigationView.getMenu().getItem(2).setCheckable(false);
+                        navigationView.getMenu().getItem(1).setCheckable(false);
                         navigationView.getMenu().getItem(3).setCheckable(false);
+                        navigationView.getMenu().getItem(4).setCheckable(false);
                         break;
                     case R.id.following_nav_header:
                         navigationView.getMenu().getItem(1).setCheckable(true);
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
                         navigationView.getMenu().getItem(3).setCheckable(false);
                         break;
                     case R.id.add_place_nav_header:
+                        navigationView.getMenu().getItem(1).setCheckable(true);
+                        navigationView.getMenu().getItem(2).setCheckable(false);
+                        navigationView.getMenu().getItem(0).setCheckable(false);
+                        navigationView.getMenu().getItem(3).setCheckable(false);
+                        navigationView.getMenu().getItem(4).setCheckable(false);
                         break;
                     case R.id.credits_nav_header:
                         navigationView.getMenu().getItem(2).setCheckable(true);

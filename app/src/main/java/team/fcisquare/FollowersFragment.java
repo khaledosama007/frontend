@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,8 +29,8 @@ import java.util.List;
 public class FollowersFragment extends Fragment {
     private View view;
     private User user;
+    private ArrayList<User> followers;
     private ListView listView;
-    private String[] names;
     private HashMap<String, String> params;
 
     public FollowersFragment() {
@@ -45,62 +46,58 @@ public class FollowersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.followers_fragment, container, false);
         user = (User)getArguments().getSerializable("user");
+        followers = new ArrayList<>();
         params = new HashMap<>();
         params.put("id", user.getId().toString());
-        Log.e("555", user.getId().toString());
         Connection con = new GetConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {
-                if(result.equals("no followers")){
-                        names = new String[0];
-               //     Toast.makeText(getContext(), "heheheh", Toast.LENGTH_SHORT).show();
-                    Log.e("555", "ya d");
+                if(result == null){
+                    Toast.makeText(getActivity(), "no followers", Toast.LENGTH_SHORT).show();
                 }else {
-                    JSONObject object = null;
                     try {
-                        object = new JSONObject(result);
-
-                        JSONArray array =  object.getJSONArray("followers");
-                        //conerting json array to string
-                        names = new String[array.length()];
-
-                        for(int i = 0;i < array.length();i++)
-                            names[i] = array.getString(i);
+                        JSONArray array = new JSONArray(result);
+                        for(int i = 0;i < array.length();i++){
+                            JSONObject object = (JSONObject) array.get(i);
+                            User follower = new User();
+                            follower.setId(Integer.parseInt(object.getString("id")));
+                            follower.setName(object.getString("name"));
+                            followers.add(follower);
+                        }
+                        listView = (ListView)view.findViewById(R.id.followers_list_view);
+                        listView.setAdapter(new FollowersAdapter(getActivity(), followers));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                 }
-                Log.e("555", result);
+                Log.e("333", result);
             }
         });
         con.execute(URIs.GET_FOLLOWERS);
-
-        listView = (ListView)view.findViewById(R.id.followers_list_view);
-    //    listView.setAdapter(new FollowersAdapter(getActivity(), names));
-
         return view;
     }
     class FollowersAdapter extends ArrayAdapter<String> {
-        private String[] names;
-        public FollowersAdapter(Context context, String[] names) {
+        private ArrayList<User> followers;
+
+        public FollowersAdapter(Context context, ArrayList<User> followers) {
             super(context, R.layout.followers_fragment);
-            this.names = names;
+            this.followers = followers;
         }
 
         @Override
         public int getCount() {
-            return names.length;
+            return followers.size();
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView == null){
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.followers_fragment, parent, false);
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.followers_custom_view, parent, false);
             }
 
-            TextView textView = (TextView)view.findViewById(R.id.folowers_custom_view_name);
-            textView.setText(names[position]);
+            TextView textView = (TextView)convertView.findViewById(R.id.folowers_custom_view_name);
+            textView.setText(followers.get(position).getName());
             return convertView;
         }
     }
