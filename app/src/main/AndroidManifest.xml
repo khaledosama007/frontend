@@ -47,6 +47,8 @@
         <activity android:name=".AddPlace"/>
         <activity android:name=".CheckIn"/>
         <activity android:name=".SavePlace"/>
+        <activity android:name=".PlacePop"
+            android:theme="@style/PopupTheme"/>
 
     </application>
 
