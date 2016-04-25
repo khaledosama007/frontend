@@ -84,7 +84,7 @@ public class CheckIn extends AppCompatActivity {
                 if(result.equals("error")){
                     isFounded.setVisibility(View.VISIBLE);
                     checkin.setEnabled(false);
-                    checkin.setBackgroundColor(R.color.colorPrimary);
+                    checkin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     isFounded.setVisibility(View.VISIBLE);
                     at.setVisibility(View.INVISIBLE);
                     chosenPlace.setVisibility(View.INVISIBLE);
@@ -100,7 +100,7 @@ public class CheckIn extends AppCompatActivity {
 
                     if(!userComment.getText().toString().equals("")) {
                         checkin.setEnabled(true);
-                        checkin.setBackgroundColor(R.color.blackShade);
+                        checkin.setBackgroundColor(getResources().getColor(R.color.blackShade));
                     }
                     isFounded.setVisibility(View.INVISIBLE);
                     at.setVisibility(View.VISIBLE);

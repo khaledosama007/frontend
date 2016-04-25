@@ -75,7 +75,7 @@ public class Splash extends Activity {
                                 user.setLon(json.getDouble("long"));
                                 user.setPass(json.getString("pass"));
                                 user.setName(json.getString("name"));
-                                intent = new Intent(getBaseContext(), UserProfile.class);
+                                intent = new Intent(getBaseContext(), MainActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("user", user);
                                 intent.putExtras(bundle);

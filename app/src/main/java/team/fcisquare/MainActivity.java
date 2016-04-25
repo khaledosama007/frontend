@@ -1,6 +1,7 @@
 package team.fcisquare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private NotificationFragment notificationFragment;
     private MessagesFragment messagesFragment;
     private FollowersFragment followersFragment;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +171,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut(MenuItem item){
-        //// TODO: 4/17/2016 remove preferences from phone
+        preferences = getSharedPreferences("userDetails", MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.putString("email", "");
+        editor.putString("pass", "");
+        editor.commit();
         startActivity(new Intent(this, Login.class));
     }
     public void profile(MenuItem item){
@@ -181,13 +188,15 @@ public class MainActivity extends AppCompatActivity {
     public void addPlace(MenuItem item){
         startActivity(new Intent(this, AddPlace.class));
     }
-    public void savePlace(MenuItem item){
+    public void savePlace(MenuItem item){ //// TODO: 4/25/2016 to be removed
         Intent intent = new Intent(this , SavePlace.class);
         intent.putExtra("id" , user.getId().toString());
         startActivity(intent);
     }
-   /* public void OnClickComment(View view){ //for fragment
-        Toast.makeText(this, "ds", Toast.LENGTH_SHORT).show();
-    }*/
+   public void search(MenuItem item){
+       Intent intent = new Intent(this, Search.class);
+       intent.putExtra("user", user);
+       startActivity(intent);
+   }
 
 }

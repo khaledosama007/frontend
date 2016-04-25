@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/followers_"
+        android:id="@+id/search_user_image"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user name"
+        android:layout_toRightOf="@+id/search_user_image"
+        android:layout_alignBottom="@+id/search_user_image"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="23dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/search_user_name"
+        android:textStyle="bold"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@color/colorPrimary"
+        android:text="Follow"
+        android:layout_alignBottom="@id/search_user_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        />
+</RelativeLayout>

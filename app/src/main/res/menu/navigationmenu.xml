@@ -20,6 +20,12 @@
             android:onClick="savePlace"
             />
         <item
+            android:id="@+id/search"
+            android:title="Search"
+            android:icon="@drawable/search"
+            android:onClick="search"
+            />
+        <item
             android:id="@+id/following_nav_header"
             android:title="Following"
             android:icon="@drawable/following"
