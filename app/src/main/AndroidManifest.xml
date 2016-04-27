@@ -49,6 +49,13 @@
         <activity android:name=".SavePlace"/>
         <activity android:name=".PlacePop"
             android:theme="@style/PopupTheme"/>
+        <activity android:name=".ShowPost"/>
+        <service android:name=".NotificationService"
+            android:enabled="true"
+
+            />
+
+
 
     </application>
 
