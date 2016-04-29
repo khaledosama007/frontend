@@ -4,13 +4,26 @@
     <include layout="@layout/toolbar" android:id="@+id/main_toolbar"/>
     <EditText
         android:layout_below="@+id/main_toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:hint="Search for ..."
         android:id="@+id/search_text"
+        android:textColor="@color/blackShade"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Search"
+        android:background="@color/colorPrimary"
+        android:layout_alignBottom="@id/search_text"
+        android:layout_toRightOf="@id/search_text"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/search_now"
+        android:onClick="onClickSearch"
         />
     <RadioGroup
         android:layout_width="match_parent"
@@ -21,16 +34,6 @@
         android:layout_marginRight="10dp"
         android:id="@+id/radio_group_search"
         >
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:id="@+id/all_radio_button"
-            android:layout_weight="1"
-            />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

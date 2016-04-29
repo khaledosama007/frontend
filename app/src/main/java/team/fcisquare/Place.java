@@ -1,9 +1,11 @@
 package team.fcisquare;
 
+import java.io.Serializable;
+
 /**
  * Created by lenovo on 21/04/2016.
  */
-public class Place {
+public class Place implements Serializable {
     private String name;
     private String description;
     private Integer id;

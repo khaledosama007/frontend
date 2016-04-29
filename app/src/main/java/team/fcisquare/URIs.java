@@ -19,6 +19,6 @@ public class URIs {
     public static final String SAVE_PLACE ="http://swproject-404error.rhcloud.com/FCISquare/rest/saveplace";
     public static final String NOTIFICATION ="http://swproject-404error.rhcloud.com/FCISquare/rest/notifications";
     public static final String SHOW_POST ="http://swproject-404error.rhcloud.com/FCISquare/rest/showpost";
-
-
+    public static final String POST_SEARCH = "http://swproject-404error.rhcloud.com/FCISquare/rest/search";
+    public static final String GET_SHOW_HOME = "http://swproject-404error.rhcloud.com/FCISquare/rest/showhome";
 }

@@ -31,5 +31,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@id/search_place_name"
         android:layout_marginRight="10dp"
+        android:id="@+id/view_place"
         />
 </RelativeLayout>

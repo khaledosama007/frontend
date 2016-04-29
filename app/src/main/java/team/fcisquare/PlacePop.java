@@ -21,6 +21,7 @@ public class PlacePop extends Activity {
     private TextView l;
     private TextView desc;
     private Place place;
+    private User user;
     private Button b;
     private HashMap<String,String> params;
     private JSONObject json;
@@ -28,11 +29,13 @@ public class PlacePop extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.place_pop);
+        place = (Place) getIntent().getSerializableExtra("place");
+        user = (User) getIntent().getSerializableExtra("user");
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int w = dm.widthPixels;
         int h = dm.heightPixels;
-        getWindow().setLayout((int)(w*.08) , (int)(h*0.8));
+        getWindow().setLayout((int)(w*.8) , (int)(h*0.8));
         //Initiate Place First
         l =(TextView) findViewById(R.id.nameLabel);
         l.setText(place.getName());

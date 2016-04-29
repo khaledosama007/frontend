@@ -30,5 +30,6 @@
         android:layout_alignBottom="@id/search_user_name"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
+        android:id="@+id/follow_user"
         />
 </RelativeLayout>

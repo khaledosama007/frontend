@@ -52,11 +52,7 @@
         <activity android:name=".ShowPost"/>
         <service android:name=".NotificationService"
             android:enabled="true"
-
             />
-
-
-
     </application>
 
 </manifest>
