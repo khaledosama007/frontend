@@ -58,6 +58,8 @@ public class NotificationFragment extends Fragment {
         desc.add("Notification 2");
         desc.add("Notification 2");*/
         notificationList = new NotificationList(getActivity(), desc);
+        //by andrew
+        /*
         li.setAdapter(notificationList);
         /////////////////////////////////////////////////////////////////////////
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +78,7 @@ public class NotificationFragment extends Fragment {
         send.putExtras(bundle);
 
         getActivity().startService(send);
-
+        */
 
         return view;
     }

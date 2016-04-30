@@ -21,4 +21,6 @@ public class URIs {
     public static final String SHOW_POST ="http://swproject-404error.rhcloud.com/FCISquare/rest/showpost";
     public static final String POST_SEARCH = "http://swproject-404error.rhcloud.com/FCISquare/rest/search";
     public static final String GET_SHOW_HOME = "http://swproject-404error.rhcloud.com/FCISquare/rest/showhome";
+    public static final String POST_MAKE_POST = "http://swproject-404error.rhcloud.com/FCISquare/rest/post";
+    public static final String GET_USER_FOLLOWERS = "http://swproject-404error.rhcloud.com/FCISquare/rest/following";
 }

@@ -1,5 +1,6 @@
 package team.fcisquare;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,11 +8,19 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,16 +28,15 @@ import java.util.HashMap;
  */
 public class CheckIn extends AppCompatActivity {
     private Button search;
-    private Button checkin;
-    private TextView searchFor;
+    private EditText searchFor;
     private EditText userComment;
     private Toolbar toolbar;
-    private Place availablePlace;
     private Connection connection;
-    private TextView isFounded;
-    private TextView at;
-    private TextView chosenPlace;
     private User user;
+    private ListView listView;
+    private ArrayList<Place> places;
+    private int lastSelected = -1;
+    private View lastViewed = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +48,16 @@ public class CheckIn extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Check in");
 
-        availablePlace = new Place();
+        user = (User) getIntent().getSerializableExtra("user");
         search = (Button) findViewById(R.id.search_place_button);
-        checkin = (Button)findViewById(R.id.check_in_button);
-        searchFor = (TextView)findViewById(R.id.place_name_request);
+        searchFor = (EditText)findViewById(R.id.search_place_space);
         userComment = (EditText)findViewById(R.id.user_comment_check_in);
-        at = (TextView)findViewById(R.id.at_text_view);
-        chosenPlace = (TextView)findViewById(R.id.user_chosen_place_for_check_in);
-
-        userComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        listView = (ListView) findViewById(R.id.search_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(v.getText().toString().equals(""))
-                    checkin.setEnabled(false);
-                else
-                    checkin.setEnabled(true);
-                return false;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lastSelected = position;
+                view.setBackgroundColor(R.color.blackShade);
             }
         });
     }
@@ -71,59 +73,79 @@ public class CheckIn extends AppCompatActivity {
     }
 
     public void OnClickSearch(View view){
+        lastSelected = -1;
         if(searchFor.getText().toString().equals("")){
             searchFor.setError("Please insert a place name");
             return;
         }
-
+        places = new ArrayList<>();
         HashMap<String, String> params = new HashMap<>();
-        params.put("name", searchFor.getText().toString());
+        params.put("query", searchFor.getText().toString());
+        params.put("filter", String.valueOf(2));
         connection = new PostConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {
-                if(result.equals("error")){
-                    isFounded.setVisibility(View.VISIBLE);
-                    checkin.setEnabled(false);
-                    checkin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    isFounded.setVisibility(View.VISIBLE);
-                    at.setVisibility(View.INVISIBLE);
-                    chosenPlace.setVisibility(View.INVISIBLE);
-                    return;
-                }
                 try {
                     JSONObject object = new JSONObject(result);
-                    availablePlace.setId(Integer.parseInt(object.getString("id")));
-                    availablePlace.setDescription(object.getString("desc"));
-                    availablePlace.setLat(Double.parseDouble(object.getString("lat")));
-                    availablePlace.setName(object.getString("name"));
-                    availablePlace.setLon(Double.parseDouble(object.getString("long")));
-
-                    if(!userComment.getText().toString().equals("")) {
-                        checkin.setEnabled(true);
-                        checkin.setBackgroundColor(getResources().getColor(R.color.blackShade));
+                    JSONArray array = object.getJSONArray("places");
+                    for(int i = 0;i < array.length();i++){
+                        JSONObject jsonObject = (JSONObject) array.get(i);
+                        Place p = new Place();
+                        p.setId(Integer.parseInt(jsonObject.getString("placeid")));
+                        p.setName(jsonObject.getString("placename"));
+                        p.setDescription(jsonObject.getString("descrition"));
+                        places.add(p);
                     }
-                    isFounded.setVisibility(View.INVISIBLE);
-                    at.setVisibility(View.VISIBLE);
-                    chosenPlace.setText(availablePlace.getName());
-                    chosenPlace.setVisibility(View.VISIBLE);
+                    listView.setAdapter(new SearchAdapter(getBaseContext(), places));
+                    listView.refreshDrawableState();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
-        connection.execute();
+        connection.execute(URIs.POST_SEARCH);
     }
     public void OnClickCheckIn(View view){
-        HashMap<String, String> params = new HashMap<>();
-        params.put("useris", user.getId().toString());
-        params.put("placeid", availablePlace.getId().toString());
-        params.put("body", userComment.getText().toString());
-        connection = new PostConnection(params, new ConnectionListener() {
-            @Override
-            public void getResult(String result) {
-                //// TODO: 4/21/2016 hahbb eh bel return :3
-            }
-        });
-        this.finish();
+        if(lastSelected != -1 && !userComment.getText().toString().equals("")){
+            HashMap<String, String> params = new HashMap<>();
+            params.put("userid", user.getId().toString());
+            params.put("placeid", places.get(lastSelected).getId().toString());
+            params.put("body", userComment.getText().toString());
+            connection = new PostConnection(params, new ConnectionListener() {
+                @Override
+                public void getResult(String result) {
+                    finish();
+                }
+            });
+            connection.execute(URIs.POST_MAKE_POST);
+        }
+    }
+    class SearchAdapter extends ArrayAdapter<Place> {
+        private ArrayList<Place> places;
+        public SearchAdapter(Context context, ArrayList<Place> places) {
+            super(context, R.layout.check_in);
+            this.places = places;
+        }
+
+        @Override
+        public int getCount() {
+            return places.size();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null)
+                convertView = getLayoutInflater().inflate(R.layout.check_in_place_finder, parent, false);
+            TextView textView = (TextView) convertView.findViewById(R.id.place_name_search);
+            textView.setText(places.get(position).getName());
+            TextView view = (TextView) convertView.findViewById(R.id.place_description);
+            view.setText(places.get(position).getDescription());
+            return convertView;
+        }
+
+        @Override
+        public Place getItem(int position) {
+            return places.get(position);
+        }
     }
 }

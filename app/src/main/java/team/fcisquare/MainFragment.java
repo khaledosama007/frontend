@@ -17,6 +17,10 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.view.View.OnKeyListener;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,11 +31,10 @@ public class MainFragment extends Fragment {
     private View view;
     private ExpandableListView expandableListView;
     private BaseExpandableListAdapter expandableAdapter;
-    private ArrayList<Integer> likes;
-    private ArrayList<String> userNames;
-    private ArrayList<String> places;
-    private HashMap<String, ArrayList<Comment>> comments; //to be altered
-    private ArrayList<String> checkInComments;
+    private Connection connection;
+    HashMap<String, String> params;
+    private User user;
+    private ArrayList<Post> posts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,80 +51,78 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        likes = new ArrayList<>();
-        userNames = new ArrayList<>();
-        places = new ArrayList<>();
-        comments = new HashMap<>();
-        checkInComments = new ArrayList<>();
-        checkInComments.add("nice place :D");
-        likes.add(15);
-        userNames.add("andrew");
-        places.add("el haram");
-        ArrayList<Comment> tmp = new ArrayList<>();
-        tmp.add(new Comment("dodo", "hiiiii"));
-        tmp.add(new Comment("mina", "shit"));
-        comments.put("andrew", tmp );
+        posts = new ArrayList<>();
+        user = (User) getActivity().getIntent().getSerializableExtra("user");
+        params = new HashMap<>();
+        params.put("id", user.getId().toString());
+        connection = new GetConnection(params, new ConnectionListener() {
+            @Override
+            public void getResult(String result) {
+                try {
+                    JSONArray mainArray = new JSONArray(result);
+                    for(int i = 0;i < mainArray.length();i++){
+                        JSONObject object = (JSONObject) mainArray.get(i);
+                        Post p = new Post();
+                        p.setBody(object.getString("postbody"));
+                        p.setId(Integer.parseInt(object.getString("postid")));
+                        ArrayList<Integer> likes = new ArrayList<>();
+                     //   likes = (ArrayList<Integer>) object.getString("likes");
+                     //   p.setLikes(likes.size());
+                  //      p.setDate(Double.parseDouble(object.getString("postdate")));
+                        JSONObject placeObject = object.getJSONObject("place");
+                        Place place = new Place();
+                        place.setDescription(placeObject.getString("descrition"));
+                        place.setId(Integer.parseInt(placeObject.getString("placeid")));
+                        place.setLat(Double.parseDouble(placeObject.getString("lat")));
+                        place.setLon(Double.parseDouble(placeObject.getString("long")));
+                        place.setName(placeObject.getString("placename"));
+                        p.setPlace(place);
+                        JSONArray commentsArray = object.getJSONArray("comments");
+                        ArrayList<team.fcisquare.Comment> comments = new ArrayList<>();
+                        for(int j = 0;j < commentsArray.length();j++){
+                            JSONObject tempObj = commentsArray.getJSONObject(i);
+                            team.fcisquare.Comment comment = new team.fcisquare.Comment();
+                            comment.setId(Integer.parseInt(tempObj.getString("commentid")));
+                            comment.setBody(tempObj.getString("commentbody"));
+                 //           comment.setDate(Double.parseDouble(tempObj.getString("commentdate")));
+                            comments.add(comment);
+                        }
+                        p.setComments(comments);
+                        posts.add(p);
+                    }
+                    setAdapter();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        connection.execute(URIs.GET_SHOW_HOME);
 
-        checkInComments.add("hurray");
-        likes.add(12);
-        userNames.add("khaled");
-        places.add("el maadi");
-        ArrayList<Comment> tmp2 = new ArrayList<>();
-        tmp2.add(new Comment("ds", "hiiiii"));
-        tmp2.add(new Comment("erre", "shit"));
-        comments.put("khaled", tmp2 );
-
-        checkInComments.add("Maaaaaa2");
-        likes.add(1);
-        userNames.add("unknown");
-        places.add("el haram");
-        ArrayList<Comment> tmp3 = new ArrayList<>();
-        tmp3.add(new Comment("dfdo", "hiiiii"));
-        tmp3.add(new Comment("d", "shit"));
-        comments.put("unknown", tmp3 );
-
-        expandableListView = (ExpandableListView)view.findViewById(R.id.home_expandable_list);
-        expandableListView.setAdapter(new MyExpandableAdapter(getActivity(), userNames, comments, likes, places, checkInComments));
 
 
-    }
-
-    class Comment{
-        public String comment;
-        public String userName;
-        public Comment(String userName, String comment) {
-            this.userName = userName;
-            this.comment = comment;
-        }
     }
 
     class MyExpandableAdapter extends BaseExpandableListAdapter{
         private Context context;
-        private ArrayList<String> userNames;
-        HashMap<String, ArrayList<Comment>> comments;
-        ArrayList<Integer> likes;
-        ArrayList<String> places;
+        private ArrayList<Post> posts;
 
-        public MyExpandableAdapter(Context context, ArrayList<String> userNames, HashMap<String, ArrayList<Comment>> comments, ArrayList<Integer> likes, ArrayList<String> places, ArrayList<String> checkInComments){
+        public MyExpandableAdapter(Context context, ArrayList<Post> posts){
             this.context = context;
-            this.userNames = userNames;
-            this.comments = comments;
-            this.likes = likes;
-            this.places = places;
+            this.posts = posts;
         }
         @Override
         public int getGroupCount() {
-            return userNames.size();
+            return posts.size();
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return comments.get(userNames.get(groupPosition)).size() + 1;
+            return posts.get(groupPosition).getComments().size() + 1;
         }
 
         @Override
         public Object getGroup(int groupPosition) {
-            return 1; ///tmp
+            return posts.get(groupPosition);
         }
 
         @Override
@@ -129,7 +130,7 @@ public class MainFragment extends Fragment {
             if(childPosition == 0){
                 return "";
             }
-            return comments.get(userNames.get(groupPosition)).get(childPosition - 1);
+            return posts.get(groupPosition).getComments().get(childPosition - 1);
         }
 
         @Override
@@ -158,28 +159,24 @@ public class MainFragment extends Fragment {
             TextView like = (TextView)convertView.findViewById(R.id.place_likes_check_in);
             TextView userComment = (TextView)convertView.findViewById(R.id.user_comment_check_in_header);
 
-            user.setText(userNames.get(groupPosition));
-            place.setText(places.get(groupPosition));
-            like.setText(likes.get(groupPosition) + " likes");
-            userComment.setText(checkInComments.get(groupPosition));
+           // user.setText(userNames.get(groupPosition));
+            place.setText(posts.get(groupPosition).getPlace().getName());
+      //      like.setText(posts.get(groupPosition).getLikes() + " likes");
+            userComment.setText(posts.get(groupPosition).getBody());
 
-
-           // View vv = convertView.findViewById(R.id.check_in_header_id);
-          //  vv.setBackgroundColor(R.color.colorPrimary);
             return convertView;
         }
 
         @Override
         public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, final ViewGroup parent) {
-        //    if(convertView == null){
                 convertView = (childPosition == 0 ? getActivity().getLayoutInflater().inflate(R.layout.add_comment, parent, false) :getActivity().getLayoutInflater().inflate(R.layout.check_in_item, parent, false));
-       //     }
             if(childPosition != 0){
-                final Comment c = comments.get(userNames.get(groupPosition)).get(childPosition -1);
+                ArrayList<Comment> comments = posts.get(groupPosition).getComments();
+                Comment c = comments.get(childPosition - 1);
                 TextView user = (TextView)convertView.findViewById(R.id.user_name_check_in_item);
                 TextView comm = (TextView)convertView.findViewById(R.id.comment_check_in_item);
-                comm.setText(c.comment);
-                user.setText(c.userName);
+                comm.setText(c.getBody());
+                user.setText(c.getId() + "");
             }else{
                 final EditText editText = (EditText)convertView.findViewById(R.id.add_comment_edittext);
                 editText.setFocusableInTouchMode(true);
@@ -200,9 +197,14 @@ public class MainFragment extends Fragment {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if(actionId == EditorInfo.IME_ACTION_DONE) {
-                            ArrayList<Comment> ccc = comments.get(userNames.get(groupPosition));
-                            ccc.add(new Comment("ds",editText.getText().toString()));
+                            ArrayList<Comment> comments = posts.get(groupPosition).getComments();
+                            Comment c = new Comment();
+                            c.setId(user.getId());
+                            c.setBody(editText.getText().toString());
+                            
+                            comments.add(c);
                             editText.setText("");
+                            updateView();
                         }
                         return false;
                     }
@@ -215,5 +217,14 @@ public class MainFragment extends Fragment {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return false;
         }
+    }
+    public void updateView(){
+        expandableAdapter.notifyDataSetChanged();
+        expandableListView.refreshDrawableState();
+    }
+    public void setAdapter(){
+        expandableAdapter = new MyExpandableAdapter(getActivity(), posts);
+        expandableListView = (ExpandableListView)view.findViewById(R.id.home_expandable_list);
+        expandableListView.setAdapter(expandableAdapter);
     }
 }
