@@ -25,16 +25,18 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter pagerAdapter;
-    private int[] tabIcons = {R.drawable.home, R.drawable.messages, R.drawable.notification, R.drawable.followers};
-    private int currentOpenedNavigationItem = -1;
+    private int[] tabIcons = {R.drawable.home, R.drawable.history, R.drawable.notification, R.drawable.followers, R.drawable.following};
     private User user;
     private Bundle bundle;
     private MainFragment mainFragment;
     private NotificationFragment notificationFragment;
-    private MessagesFragment messagesFragment;
+    //private MessagesFragment messagesFragment;
+    private MyFollowingFragment followingFragment;
+    private HistoryFragment historyFragment;
     private FollowersFragment followersFragment;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private final int TABS_LIMIT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +72,17 @@ public class MainActivity extends AppCompatActivity {
         notificationFragment = new NotificationFragment();
         notificationFragment.setArguments(bundle);
 
-        messagesFragment = new MessagesFragment();
-        messagesFragment.setArguments(bundle);
+  //      messagesFragment = new MessagesFragment();
+  //      messagesFragment.setArguments(bundle);
+
+        historyFragment = new HistoryFragment();
+        historyFragment.setArguments(bundle);
 
         followersFragment = new FollowersFragment();
         followersFragment.setArguments(bundle);
+
+        followingFragment = new MyFollowingFragment();
+        followingFragment.setArguments(bundle);
     }
 
     private void setTabs() {
@@ -82,11 +90,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(mainFragment);
-        pagerAdapter.addFragment(messagesFragment);
+        //pagerAdapter.addFragment(messagesFragment);
+        pagerAdapter.addFragment(historyFragment);
         pagerAdapter.addFragment(notificationFragment);
         pagerAdapter.addFragment(followersFragment);
+        pagerAdapter.addFragment(followingFragment);
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(TABS_LIMIT);
 
         //assign the pager for the tabs
         tabLayout = (TabLayout)findViewById(R.id.tabs);
@@ -96,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter{

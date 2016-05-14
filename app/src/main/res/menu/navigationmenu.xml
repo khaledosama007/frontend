@@ -26,11 +26,6 @@
             android:onClick="search"
             />
         <item
-            android:id="@+id/following_nav_header"
-            android:title="Following"
-            android:icon="@drawable/following"
-            />
-        <item
             android:id="@+id/credits_nav_header"
             android:title="Credits"
             android:icon="@drawable/credits"
