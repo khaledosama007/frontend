@@ -1,9 +1,7 @@
 package team.fcisquare;
 
-
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -16,17 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.view.View.OnKeyListener;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 /**
  * Created by Andrew on 4/16/2016.
@@ -81,6 +73,7 @@ public class MainFragment extends Fragment {
                         p.setLikes(likesIds.length());
                         Log.e("test", p.getLikes() + "");
                         p.setDate(Long.parseLong(object.getString("postdate")));
+
                         JSONObject placeObject = object.getJSONObject("place");
                         Place place = new Place();
                         place.setDescription(placeObject.getString("descrition"));
@@ -96,6 +89,7 @@ public class MainFragment extends Fragment {
                             team.fcisquare.Comment comment = new team.fcisquare.Comment();
                             comment.setId(Integer.parseInt(tempObj.getString("commentid")));
                             comment.setBody(tempObj.getString("commentbody"));
+
                             comments.add(comment);
                         }
                         p.setComments(comments);
@@ -114,12 +108,17 @@ public class MainFragment extends Fragment {
     class MyExpandableAdapter extends BaseExpandableListAdapter{
         private Context context;
         private ArrayList<Post> posts;
-        private final User innerUser;
+        private User innerUser;
 
-        public MyExpandableAdapter(Context context, ArrayList<Post> posts, User innerUser){
+        public MyExpandableAdapter(Context context, ArrayList<Post> posts, User innerUser) {
             this.context = context;
             this.posts = posts;
             this.innerUser = user;
+        }
+
+        public MyExpandableAdapter(Context context, ArrayList<Post> posts){
+            this.context = context;
+            this.posts = posts;
         }
         @Override
         public int getGroupCount() {
@@ -164,6 +163,7 @@ public class MainFragment extends Fragment {
             if(convertView == null){
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.check_in_header, parent, false);
             }
+
             setParentViewValues(groupPosition, convertView);
             final TextView like = (TextView) convertView.findViewById(R.id.place_likes_check_in);
             final Button likeButton = (Button) convertView.findViewById(R.id.like_check_in);
@@ -208,7 +208,6 @@ public class MainFragment extends Fragment {
             userComment.setText(posts.get(groupPosition).getBody());
         }
 
-        @NonNull
         private String getDate(Date postDate) {
             return String.valueOf(postDate.getMinutes()) + "/" + String.valueOf(postDate.getHours());
         }

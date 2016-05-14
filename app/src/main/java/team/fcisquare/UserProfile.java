@@ -23,6 +23,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class UserProfile extends AppCompatActivity {
+
     private User user;
     private Bundle bundle;
     private TextView userName;
@@ -55,6 +56,7 @@ public class UserProfile extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
     public void OnClickViewLastPosition(View view){
         //// TODO: 3/27/2016 to be removed later, this is just for testing
         HashMap<String, String> params = new HashMap<>();

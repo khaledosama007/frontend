@@ -10,8 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -154,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void search(MenuItem item){
+
        Intent intent = new Intent(this, Search.class);
        intent.putExtra("user", user);
        startActivity(intent);

@@ -124,6 +124,7 @@ public class Signup extends AppCompatActivity {
             }
         });
         postCon.execute(URIs.POST_SIGN_UP);
+
     }
 
     public void onClickLogin(View view) {

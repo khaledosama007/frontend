@@ -24,6 +24,7 @@ public class Post implements Serializable {
         isLikedByUser = likedByUser;
     }
 
+
     public int getId() {
         return id;
     }

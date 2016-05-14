@@ -49,8 +49,6 @@
         android:id="@+id/user_profile_data"
         ></ListView>
 
-
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -62,9 +60,7 @@
         android:onClick="OnClickViewLastPosition"
         android:id="@+id/viewlast"
         android:layout_below="@id/user_profile_check_in"
-        android:textColor="@color/White"
         />
-
     <TextView
         android:layout_width="160dp"
         android:layout_height="35dp"

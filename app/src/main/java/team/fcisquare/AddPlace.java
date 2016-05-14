@@ -46,6 +46,7 @@ public class AddPlace extends AppCompatActivity {
     private final int REQUEST_CODE = 10;
     private final int TIME_IN_MSECOND = 500;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,7 +181,6 @@ public class AddPlace extends AppCompatActivity {
     private boolean permissionNeeded() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
     }
-
 
     private void sayBye() {
         try {

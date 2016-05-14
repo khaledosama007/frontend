@@ -25,4 +25,5 @@ public class URIs {
     public static final String GET_USER_FOLLOWERS = "http://swproject-404error.rhcloud.com/FCISquare/rest/following";
     public static final String POST_LIKE = "http://swproject-404error.rhcloud.com/FCISquare/rest/like";
     public static final String POST_COMMENT = "http://swproject-404error.rhcloud.com/FCISquare/rest/comment";
+
 }

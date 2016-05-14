@@ -27,6 +27,7 @@ public class NotificationList extends ArrayAdapter<String> {
         TextView textView = (TextView)v.findViewById(R.id.ndesc);
         textView.setText(description.get(position));
 
+
         return v;
     }
 

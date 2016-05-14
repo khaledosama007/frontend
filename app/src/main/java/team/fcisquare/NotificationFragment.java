@@ -25,6 +25,7 @@ public class NotificationFragment extends Fragment {
     private NotificationList notificationList;
     private CustomBroadcast br;
     private Bundle bundle = new Bundle();
+
     private ArrayList<team.fcisquare.Notification> returned; //returned from service
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class NotificationFragment extends Fragment {
         view = inflater.inflate(R.layout.notification_fragment, container, false);
 
          listView = (ListView) view.findViewById(R.id.notification_list);
+
        //for testing
        /* desc.add("Notification 1");
         desc.add("Notification 2");

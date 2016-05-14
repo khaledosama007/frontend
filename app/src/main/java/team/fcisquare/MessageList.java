@@ -27,18 +27,18 @@ public class MessageList extends ArrayAdapter<String> {
     }
 
     @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.message_list,null);
-           if(read[position] == true){
-               v.setBackgroundResource(R.color.textColorPrimary);
-           }
-            else
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v=((Activity)getContext()).getLayoutInflater().inflate(R.layout.message_list,null);
+        if(read[position] == true){
+            v.setBackgroundResource(R.color.textColorPrimary);
+        }
+        else
             v.setBackgroundResource(R.color.MyBlue);
 
-            TextView txt1 = (TextView) v.findViewById(R.id.messagein);
-            txt1.setText(test[position]);
-            TextView tv = (TextView) v.findViewById(R.id.messagesender);
-            tv.setText(Senders[position]);
-            return v;
+        TextView txt1 = (TextView) v.findViewById(R.id.messagein);
+        txt1.setText(test[position]);
+        TextView tv = (TextView) v.findViewById(R.id.messagesender);
+        tv.setText(Senders[position]);
+        return v;
     }
 }

@@ -31,8 +31,8 @@ public class SavePlace extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Save a place");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
+
     public void onClickSavePlace(View v){
         place = new Place();
         params = new HashMap<String , String>();

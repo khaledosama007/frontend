@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
         params = new HashMap<String, String>();
         params.put("email", username);
         params.put("pass", password);
+
         Connection postCon = new PostConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {
@@ -78,5 +79,4 @@ public class Login extends AppCompatActivity {
         startActivity(new Intent(this, Signup.class));
         finish();
     }
-
 }

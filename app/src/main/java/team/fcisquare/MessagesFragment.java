@@ -28,6 +28,7 @@ public class MessagesFragment extends Fragment {
         view = inflater.inflate(R.layout.message_fragment, container, false);
         ListView listView = (ListView) view.findViewById(R.id.mlist);
         listView.setAdapter(new MessageList(getActivity() , Messages , readness , Senders));
+
         return view;
     }
 

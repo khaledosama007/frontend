@@ -19,6 +19,7 @@ public class Followers extends Activity {
     private HashMap<String, String> params;
     //ArrayAdapter ad;
     //JSONObject profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class Followers extends Activity {
         Intent intent = getIntent();
         //Integer i = intent.getIExtra("id");
        params.put("id" ,intent.getStringExtra("id"));
+
         Connection con = new GetConnection(params, new ConnectionListener() {
             @Override
             public void getResult(String result) {

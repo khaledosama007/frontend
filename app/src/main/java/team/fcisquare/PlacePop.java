@@ -26,6 +26,7 @@ public class PlacePop extends Activity {
     private HashMap<String,String> params;
     private JSONObject json;
     private final double WINDOW_SIZE = 0.8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -44,7 +45,6 @@ public class PlacePop extends Activity {
         desc = (TextView)findViewById(R.id.placeDesc);
         desc.setText(place.getDescription());
         save = (Button)findViewById(R.id.savebutton);
-
     }
     public void onClickSavePlace(View v){
         place = new Place();

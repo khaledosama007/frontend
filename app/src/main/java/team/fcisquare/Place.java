@@ -52,4 +52,5 @@ public class Place implements Serializable {
     public void setLon(Double lon) {
         this.lon = lon;
     }
+
 }

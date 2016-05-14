@@ -1,18 +1,12 @@
 package team.fcisquare;
 
-import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +29,6 @@ public class NotificationService extends Service {
         /*super("Notification Service");*/
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -47,6 +40,7 @@ public class NotificationService extends Service {
         innerIntent.setAction(NotificationFragment.CustomBroadcast.ACTION_RESP);
         innerIntent.addCategory(Intent.CATEGORY_DEFAULT);
         bundle = new Bundle(innerIntent.getExtras());
+
         user = new User();
         user = (User) bundle.getSerializable("user");
         params = new HashMap<String, String>();
@@ -73,12 +67,14 @@ public class NotificationService extends Service {
                         Date nDate = sdf.parse(parsedate);
                         notification.setDate(nDate);
                         notification.setTarget(Integer.parseInt(json.getString("target")));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     notifications.add(notification);
+
                 }
                 //doInBackground();
 
@@ -88,6 +84,7 @@ public class NotificationService extends Service {
         //parameters from excuting get notification
         innerIntent.putExtra("list" , notifications);
         sendBroadcast(innerIntent);
+
         //Toast.makeText(this, "On Handle And Broad", Toast.LENGTH_LONG).show();
         //Looper.loop();
         return START_STICKY;

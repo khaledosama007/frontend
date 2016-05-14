@@ -31,6 +31,7 @@ public class ShowPost extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_post);
         postID = Integer.parseInt(getIntent().getStringExtra("postid"));
+
         params = new HashMap<String , String>();
         params.put("id", postID.toString());
         Connection con = new PostConnection(params, new ConnectionListener() {
@@ -46,6 +47,7 @@ public class ShowPost extends Activity {
                         place.setLon(temp.getDouble("long"));
                     likelist=(ArrayList<Integer>) object.get("likes");
                     array = (JSONArray) object.get("comment");
+
                     for(int i = 0 ; i < array.length() ; i++){
                         temp = (JSONObject) array.getJSONObject(i);
                         jsonuser = (JSONObject) temp.get("owner");
