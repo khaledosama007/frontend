@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fbf8f8"
+    >
+
+    <include layout="@layout/toolbar" android:id="@+id/main_toolbar"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/profile_image"
+        android:id="@+id/user_profile_picture"
+       android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/main_toolbar"
+        />
+    <TextView
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        android:id="@+id/user_profile_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28dp"
+        android:layout_toRightOf="@id/user_profile_picture"
+        android:layout_alignBottom="@+id/user_profile_picture"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Check in"
+        android:layout_below="@id/user_profile_name"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/White"
+        android:background="@color/colorPrimary"
+        android:id="@+id/user_profile_check_in"
+        android:onClick="OnClickCheckIn"
+       />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lat"
+        android:layout_marginTop="70dp"
+        android:id="@+id/user_profile_data"
+        ></ListView>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="view last position"
+        android:background="@color/colorPrimary"
+        android:onClick="OnClickViewLastPosition"
+        android:id="@+id/viewlast"
+        android:layout_below="@id/user_profile_check_in"
+        android:textColor="@color/White"
+        />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/viewlast"
+        android:layout_marginTop="10dp"
+        android:id="@+id/lat"
+        android:background="@color/pureWhite"
+        android:layout_marginLeft="20dp"
+        android:hint="Latitude"
+        android:textAlignment="center"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/viewlast"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/lat"
+        android:layout_marginLeft="10dp"
+        android:background="@color/pureWhite"
+        android:id="@+id/lon"
+        android:hint="Longitude"
+        android:textAlignment="center"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/lat"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/pureWhite"
+        android:id="@+id/user_profile_place_name"
+        android:hint="Place Name"
+        android:textAlignment="center"
+        android:padding="5dp"
+        />
+</RelativeLayout>

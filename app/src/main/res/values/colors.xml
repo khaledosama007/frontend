@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <!--   <color name="colorPrimary">#3F51B5</color>  -->
+ <!--   <color name="colorPrimaryDark">#303F9F</color> -->
+ <!--   <color name="colorAccent">#FF4081</color> -->
+    <color name="MyBlue">#3399ff</color>
+    <color name="Green">#00e64d</color>
+    <color name="White">#ffffff</color>
+    <color name="YourBlue">#2ec1e2</color>
+    <color name="blackShade">#181818</color>
+    <color name="darkShade">#0d0d0d</color>
+    <color name="pureWhite">#ffffff</color>
+    <color name="deadGrey">#b2b2b2</color>
+    <color name="transWhite">#80ffffff</color>
+
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimaryDark">#093f66</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#3288c4</color>
+   <color name="expandableListParent">#99ddff</color>
+   <color name="expandableListChild">#80d4ff</color>
+</resources>

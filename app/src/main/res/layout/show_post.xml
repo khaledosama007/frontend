@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:id="@+id/user_name_post"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="38dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="is at"
+        android:id="@+id/is_at_post"
+        android:layout_alignBottom="@+id/user_name_post"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_show_post"
+        android:layout_alignTop="@+id/is_at_post"
+        android:layout_toRightOf="@+id/is_at_post"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:src="@drawable/check_in" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Place Name"
+        android:id="@+id/place_post"
+        android:layout_alignTop="@+id/img_show_post"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Like 00"
+        android:id="@+id/show_post_likes"
+        android:layout_below="@+id/img_show_post"
+        android:layout_alignRight="@+id/place_post"
+        android:layout_alignEnd="@+id/place_post"
+        android:layout_marginTop="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:id="@+id/comments_show"
+        android:layout_below="@+id/show_post_likes"
+        android:layout_alignLeft="@+id/user_name_post"
+        android:layout_alignStart="@+id/user_name_post"
+        android:layout_marginTop="24dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_show_post"
+        android:layout_below="@+id/comments_show"
+        android:layout_marginTop="23dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/show_desc"
+        android:layout_below="@+id/img_show_post"
+        android:layout_alignLeft="@+id/user_name_post"
+        android:layout_alignStart="@+id/user_name_post" />
+</RelativeLayout>
